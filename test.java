@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class test {
@@ -13,35 +17,35 @@ public class test {
             System.out.println(c + ". " + arquivo.getName() + "\t\t" + arquivo.length() + " bytes");
             c++;
         }
-        Scanner scanner = new Scanner(System.in);
-        int seletor = 0;
-        while (seletor < listaArquivos.length || seletor > 1) {
-            seletor = scanner.nextInt();
-            System.out.println("Arquivo não encontrado");
-        }
+        try {
+            Scanner scanner = new Scanner(System.in);
+            int seletor = scanner.nextInt();
+            while (seletor > listaArquivos.length || seletor < 1) {
+                System.out.println("Selecao invalida");
+                seletor = scanner.nextInt();
+            }
 
-        long startTime = System.currentTimeMillis();
-        long endTime = System.currentTimeMillis();
+            BufferedReader br = new BufferedReader(new FileReader(listaArquivos[seletor - 1].getPath()));
+            String linha = br.readLine();
+            long startTime = System.currentTimeMillis();
+            DNA.builder(linha);
+            long endTime = System.currentTimeMillis();
+            System.out.println("Analise concluida em " + (endTime - startTime) + " milisegundos");
+
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar o arquivo");
+        } catch (InputMismatchException e) {
+            System.out.println("O sistema so aceita numeros");
+        }
 
         // startTime = System.currentTimeMillis();
         // DNA.Sequencia("DNANDANDANDANADNDDDAN");
         // endTime = System.currentTimeMillis();
         // System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
-        startTime = System.currentTimeMillis();
-        DNA.Builder("DNA");
-        endTime = System.currentTimeMillis();
-        System.out.println("That took " + (endTime - startTime) + " milliseconds");
-
         // startTime = System.currentTimeMillis();
         // DNA.Dicionario(
         // "");
-        // endTime = System.currentTimeMillis();
-        // System.out.println("That took " + (endTime - startTime) + " milliseconds");
-
-        // startTime = System.currentTimeMillis();
-        // ListaLinearDuplamenteEncadeada.listaLinear(
-        // "DNANDANDANDANADNDDDAN");
         // endTime = System.currentTimeMillis();
         // System.out.println("That took " + (endTime - startTime) + " milliseconds");
     }

@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class DNA {
 
-    public static void Sequencia(String sequencia) {
+    public static void sequencia(String sequencia) {
 
         ArrayList<Character> lista = new ArrayList<Character>();
         for (int i = 0; i < sequencia.length(); i++) {
@@ -30,7 +30,7 @@ public class DNA {
         System.out.println(lista.toString());
     }
 
-    public static void Builder(String sequencia) {
+    public static void builder(String sequencia) {
         StringBuilder sb = new StringBuilder(sequencia);
         int c = 0;
         while (sb.length() != c + 1) {
@@ -51,7 +51,7 @@ public class DNA {
         System.out.println(sb.toString());
     }
 
-    public static void Dicionario(String sequencia) {
+    public static void dicionario(String sequencia) {
         int c = 0;
         while (sequencia.length() != c + 1) {
             // System.out.println(sequencia);
