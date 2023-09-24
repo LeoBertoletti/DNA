@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DNA {
+    long startTime;
+    long endTime;
 
     public static void sequencia(String sequencia) {
 
@@ -30,25 +32,39 @@ public class DNA {
         System.out.println(lista.toString());
     }
 
-    public static void builder(String sequencia) {
-        StringBuilder sb = new StringBuilder(sequencia);
-        int c = 0;
-        while (sb.length() != c + 1) {
-            if (sb.charAt(c) == sb.charAt(c + 1)) {
-                c++;
+    public void builder(String sequencia) {
+        startTime = System.currentTimeMillis();
+        StringBuilder cadeia = new StringBuilder(sequencia);
+        int index = 0;
+        while (cadeia.length() != index + 1) {
+            String indexChar = cadeia.substring(index, index + 1);
+            String indexChar2 = cadeia.substring(index + 1, index + 2);
+            if (indexChar.equals(indexChar2)) {
+                index++;
                 continue;
             }
-            StringBuilder lista2 = new StringBuilder("DNA");
-            lista2.deleteCharAt(lista2.indexOf(sb.substring(c, c + 1)));
-            lista2.deleteCharAt(lista2.indexOf(sb.substring(c + 1, c + 2)));
-            sb.deleteCharAt(c);
-            sb.deleteCharAt(c);
-            sb.append(lista2.charAt(0));
-            if (c > 0) {
-                c--;
+
+            cadeia.append(getCharSubstituto(indexChar, indexChar2));
+            cadeia.delete(index, index + 2);
+
+            if (index > 0) {
+                index--;
             }
         }
-        System.out.println(sb.toString());
+        endTime = System.currentTimeMillis();
+        System.out.println(cadeia.toString());
+        System.out.println("Analise concluida em " + (endTime - startTime) + " milisegundos");
+    }
+
+    private String getCharSubstituto(String char1, String char2) {
+        if (("N".equals(char1) || "N".equals(char2)) && ("A".equals(char1) || "A".equals(char2))) {
+            return "D";
+        } else if (("D".equals(char1) || "D".equals(char2)) && ("A".equals(char1) || "A".equals(char2))) {
+            return "N";
+        } else if (("D".equals(char1) || "D".equals(char2)) && ("N".equals(char1) || "N".equals(char2))) {
+            return "A";
+        }
+        return "";
     }
 
     public static void dicionario(String sequencia) {

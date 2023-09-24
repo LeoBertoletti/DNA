@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class test {
 
     public static void main(String[] args) {
+        DNA DNA = new DNA();
 
         System.out.println("Selecione o arquivo:");
         File diretorio = new File("testes");
@@ -27,10 +28,7 @@ public class test {
 
             BufferedReader br = new BufferedReader(new FileReader(listaArquivos[seletor - 1].getPath()));
             String linha = br.readLine();
-            long startTime = System.currentTimeMillis();
             DNA.builder(linha);
-            long endTime = System.currentTimeMillis();
-            System.out.println("Analise concluida em " + (endTime - startTime) + " milisegundos");
 
         } catch (IOException e) {
             System.out.println("Erro ao carregar o arquivo");
